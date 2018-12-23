@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-import os
-import sys
+################################################################################################################
+# Changed functionality: now runs from command line, with following configs:
+#       No arguments       - runs from t0=10 days ago to t1=3 days ago
+#       t0 and t1 given    - guesses input type (mjd, ymd etc) and runs from t0 to t1
+#       t0, t1 and f given - like above, but makes input format explicit (in case guessing function doesnt work)
+################################################################################################################
+
 import pandas as pd
 from datetime import datetime
-from swarm_python_files_edited.utils import do_dateconv
-
+from utils import do_dateconv_ghost, get_panda_ghost_times
 
 args = ['ymd=20180918130116.7', '+str']
-t0_pd = do_dateconv('ymd=20180918130116.7')
+t0_pd = do_dateconv_ghost('ymd=20180918130116.7')
 print(t0_pd)
 
 
@@ -20,12 +24,14 @@ tnow = pd.to_datetime(datetime.now())
 t3dago = tnow - pd.to_timedelta(3, 'D')
 t10dago = tnow - pd.to_timedelta(10, 'D')
 
+
 ######################################################################################
 t0_arg = 'ymd=20180918130116.7'
 t1_arg = 'ymd=20180919130116.7'
 
-t0_pd = do_dateconv(t0_arg)
-t1_pd = do_dateconv(t1_arg)
+# t0_pd = do_dateconv_ghost(t0_arg)
+# t1_pd = do_dateconv_ghost(t1_arg)
+t0_pd, t1_pd = get_panda_ghost_times()
 print(t0_pd, t1_pd)
 
 ########################################################################################
