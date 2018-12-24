@@ -5,6 +5,8 @@ import pandas as pd
 import argparse
 from datetime import datetime
 
+# Note that function in here labelled 'ghost' also work for the process_dnsxpod_l2.py script
+
 this_dir = os.getcwd()
 top_dir = Path(this_dir).parent
 dateconv_dir = os.path.join(top_dir, 'dateconv')
@@ -30,8 +32,7 @@ def set_argparse_ghost():
     parser.add_argument('t0=', 'T0=', '--time_in_0',  dest='time_in_0', required=False, help='Start time')
     parser.add_argument('t1=', 'T1=', '--time_in_1',  dest='time_in_1', required=False, help='End time')
     parser.add_argument('f=', 'F=', '--time_format', dest='time_f', required=False, help='Time input format (same for both)')
-    parser.add_argument('-np', '--noprint', dest='noprint', required=False, help='Removes informational prints (eg regarding input format etc)', action='store_true')
-
+    parser.add_argument('-p', '--print', dest='printing', required=False, help='Prints some extra information as header', action='store_true')
 
     args = parser.parse_args()
     return args
@@ -50,9 +51,7 @@ def get_panda_ghost_times():
     t0 = args.time_in_0
     t1 = args.time_in_1
     t_format = args.time_f
-    noprint = args.noprint
-    if noprint: printing = False
-    else: printing = True
+    printing = args.printing
 
     # do_dateconv_ghost("str=2018-12-20 17:35:11.379233 UTC")
 

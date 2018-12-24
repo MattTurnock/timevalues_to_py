@@ -16,9 +16,7 @@ exportsettings = "-nofooter -noheader -invalid=skip -realformat=f13.10"
 satletters = ["A", "B", "C"]
 
 ######################################################################################
-
 t0_pd, t1_pd = get_panda_ghost_times()
-
 ########################################################################################
 
 ymd0 = datetime.strftime(t0_pd, '%Y%m%d000000') # Round down to midnight on the day
@@ -45,4 +43,4 @@ for daystart in daystarts:
             productlist += f"S{satletter}_Basic/Quat_Interpolated/{quatfield} " 
         command = f"exportdataproductscdf.exe {exportsettings} {productlist} -timeformat=gho t=gps:{ymd0},{ymd1} > {outputpath}/S{satletter}_{year}_{doy}.att"
         print(command)
-        #os.system(command)
+        os.system(command)
