@@ -30,6 +30,7 @@ def set_argparse_ghost():
     parser.add_argument('t0=', 'T0=', '--time_in_0',  dest='time_in_0', required=False, help='Start time')
     parser.add_argument('t1=', 'T1=', '--time_in_1',  dest='time_in_1', required=False, help='End time')
     parser.add_argument('f=', 'F=', '--time_format', dest='time_f', required=False, help='Time input format (same for both)')
+    parser.add_argument('-np', '--noprint', dest='noprint', required=False, help='Removes informational prints (eg regarding input format etc)', action='store_true')
 
 
     args = parser.parse_args()
@@ -49,24 +50,27 @@ def get_panda_ghost_times():
     t0 = args.time_in_0
     t1 = args.time_in_1
     t_format = args.time_f
+    noprint = args.noprint
+    if noprint: printing = False
+    else: printing = True
 
     # do_dateconv_ghost("str=2018-12-20 17:35:11.379233 UTC")
 
     # Set input format for dateconv
     if t_format == None:
-        print("guess format")
+        if printing: print("guess format")
         dateconv_format = "t="
     else:
-        print("explicit format")
+        if printing: print("explicit format")
         dateconv_format = "%s=" %t_format
 
     if t0!=None and t1!=None:
-        print("Both inputs given")
+        if printing: print("Both inputs given")
         t0_dateconv_arg = dateconv_format + t0
         t1_dateconv_arg = dateconv_format + t1
 
     elif t0==None and t1==None:
-        print("No inputs given")
+        if printing: print("No inputs given")
         t0_str, t1_str = default_ghost_times()
         t0_dateconv_arg = 'str=%s' %t0_str
         t1_dateconv_arg = 'str=%s' %t1_str

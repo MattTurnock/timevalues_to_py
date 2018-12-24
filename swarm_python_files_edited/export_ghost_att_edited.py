@@ -10,29 +10,14 @@ import pandas as pd
 from datetime import datetime
 from utils import do_dateconv_ghost, get_panda_ghost_times
 
-args = ['ymd=20180918130116.7', '+str']
-t0_pd = do_dateconv_ghost('ymd=20180918130116.7')
-print(t0_pd)
-
-
-outputpath = "/home/swarmgen/WP8000/commissioning/POD/Data/Att" 
+outputpath = "/home/swarmgen/WP8000/commissioning/POD/Data/Att"
 exportsettings = "-nofooter -noheader -invalid=skip -realformat=f13.10"
 
 satletters = ["A", "B", "C"]
 
-tnow = pd.to_datetime(datetime.now())
-t3dago = tnow - pd.to_timedelta(3, 'D')
-t10dago = tnow - pd.to_timedelta(10, 'D')
-
-
 ######################################################################################
-t0_arg = 'ymd=20180918130116.7'
-t1_arg = 'ymd=20180919130116.7'
 
-# t0_pd = do_dateconv_ghost(t0_arg)
-# t1_pd = do_dateconv_ghost(t1_arg)
 t0_pd, t1_pd = get_panda_ghost_times()
-print(t0_pd, t1_pd)
 
 ########################################################################################
 
